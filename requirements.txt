@@ -3,3 +3,5 @@ twilio==9.6.2
 fastapi==0.115.12
 aenum==3.1.16
 pydantic==2.11.5
+gunicorn==23.0.0
+uvicorn==0.34.2
