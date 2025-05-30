@@ -19,7 +19,6 @@ class Twilio:
             password=os.getenv("AUTH_TOKEN")
         )
 
-    @property
     def get_timestamp(self):
         timestamp = datetime.now()
         print(timestamp)
@@ -37,7 +36,7 @@ class Twilio:
         return SmsResponse(
             host=message.from_,
             recipient=message.to,
-            date_created=self.get_timestamp,
+            date_created=self.get_timestamp(),
             body=recipient.message
         )
 
@@ -54,6 +53,6 @@ class Twilio:
         return CallResponse(
             host=call.from_formatted,
             recipient=call.to_formatted,
-            date_created=call.date_created,
+            date_created=self.get_timestamp(),
             body=str(response)
         )
