@@ -53,5 +53,5 @@ class Twilio:
             host=call.from_formatted,
             recipient=call.to_formatted,
             date_created=self._get_timestamp(),
-            body=str(response)
+            body=recipient.message
         )
