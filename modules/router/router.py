@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from fastapi import FastAPI, APIRouter
+from typing import Annotated
+from fastapi import FastAPI, APIRouter, Query
 
 from modules.worker import Worker
 from objects.configs import RouterParameters
@@ -33,7 +34,7 @@ class Controller:
 
         return self
 
-    async def _send_sms(self, recipient: Recipient) -> SmsResponse:
+    async def _send_sms(self, recipient: Annotated[Recipient, Query()]) -> SmsResponse:
         return await self._WORKER.send_sms(recipient)
 
 
