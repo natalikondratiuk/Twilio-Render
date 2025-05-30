@@ -1,0 +1,18 @@
+{
+  "router_params": {
+    "host": "0.0.0.0",
+    "port": 8001,
+    "sms_params": {
+      "route": "/sms/",
+      "methods": "POST"
+    },
+    "voice_params": {
+      "route": "/voice/",
+      "methods": "POST"
+    }
+  },
+  "twilio_params": {
+    "phone": "+17655536784",
+    "language": "uk-UK"
+  }
+}
