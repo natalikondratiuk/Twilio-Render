@@ -14,13 +14,24 @@ class Twilio:
         self._twilio_params: TwilioParameters = twilio_params
 
         self._client = Client(
-            username=os.getenv("USERNAME"),
-            password=os.getenv("PASSWORD")
+            username=os.getenv("ACCOUNT_SID"),
+            password=os.getenv("AUTH_TOKEN")
         )
 
-    async def send_sms(self):
-        return {"username": os.getenv("USERNAME"),
-                "password": os.getenv("PASSWORD")}
+    async def send_sms(self, recipient: Recipient) -> SmsResponse:
+        message = await self._client.messages.create_async(
+            from_=self._twilio_params.phone,
+            to=recipient.phone,
+            body=recipient.message
+        )
+        date_created = message.date_created.strftime("%Y-%m-%d %H:%M:%S")
+
+        return SmsResponse(
+            host=message.from_,
+            recipient=message.to,
+            date_created=date_created,
+            body=recipient.message
+        )
 
     async def make_call(self, recipient: Recipient) -> CallResponse:
         response = VoiceResponse()

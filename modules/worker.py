@@ -15,8 +15,8 @@ class Worker:
     async def run(self) -> Worker:
         return self
 
-    async def send_sms(self):
-        return await self._twilio.send_sms()
+    async def send_sms(self, recipient: Recipient) -> SmsResponse:
+        return await self._twilio.send_sms(recipient)
 
     async def make_call(self, recipient: Recipient) -> CallResponse:
         return await self._twilio.make_call(recipient=recipient)
