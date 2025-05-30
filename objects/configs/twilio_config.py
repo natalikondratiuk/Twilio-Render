@@ -2,5 +2,5 @@ from dataclasses import dataclass
 
 @dataclass
 class TwilioParameters:
-    password: str
+    phone: str
     language: str
