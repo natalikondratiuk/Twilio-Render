@@ -22,6 +22,7 @@ class Twilio:
     @property
     def get_timestamp(self):
         timestamp = datetime.now()
+        print(timestamp)
         timestamp = timestamp.strftime("%Y-%m-%d %H:%M:%S")
 
         return timestamp
