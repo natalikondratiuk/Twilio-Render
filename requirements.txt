@@ -1,0 +1,5 @@
+python-dotenv==1.1.0
+twilio==9.6.2
+fastapi==0.115.12
+aenum==3.1.16
+pydantic==2.11.5
