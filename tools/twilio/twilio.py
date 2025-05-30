@@ -19,6 +19,7 @@ class Twilio:
         )
 
     async def send_sms(self, recipient: Recipient) -> SmsResponse:
+        print(f"Phone: {recipient.phone}, type - {type(recipient.phone)}")
         message = self._client.messages.create(
             from_=self._twilio_params.phone,
             to=recipient.phone,
