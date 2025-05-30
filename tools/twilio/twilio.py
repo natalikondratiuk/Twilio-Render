@@ -1,10 +1,11 @@
 import os
 from dotenv import load_dotenv
 load_dotenv()
+from datetime import datetime
 
 from twilio.rest import Client
-
 from twilio.twiml.voice_response import VoiceResponse
+
 from objects.configs import TwilioParameters
 from objects.schemas import Recipient
 from objects.responses import SmsResponse, CallResponse
@@ -18,19 +19,24 @@ class Twilio:
             password=os.getenv("AUTH_TOKEN")
         )
 
+    @property
+    def get_timestamp(self):
+        timestamp = datetime.now()
+        timestamp = timestamp.strftime("%Y-%m-%d %H:%M:%S")
+
+        return timestamp
+
     async def send_sms(self, recipient: Recipient) -> SmsResponse:
-        print(f"Phone: {recipient.phone}, type - {type(recipient.phone)}")
         message = self._client.messages.create(
             from_=self._twilio_params.phone,
             to=recipient.phone,
             body=recipient.message
         )
-        date_created = message.date_created.strftime("%Y-%m-%d %H:%M:%S")
 
         return SmsResponse(
             host=message.from_,
             recipient=message.to,
-            date_created=date_created,
+            date_created=self.get_timestamp,
             body=recipient.message
         )
 
