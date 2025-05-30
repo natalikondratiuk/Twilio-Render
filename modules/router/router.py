@@ -5,6 +5,9 @@ from fastapi import FastAPI, APIRouter
 from modules.worker import Worker
 from objects.configs import RouterParameters
 
+from objects.schemas import Recipient
+from objects.responses import SmsResponse
+
 class Controller:
     _WORKER: Worker
 
@@ -24,12 +27,13 @@ class Controller:
 
     @property
     def add_route(self) -> Controller:
-        self._router.add_api_route(self._config.sms_params.route, self._send_sms, methods=[self._config.sms_params.methods])
+        self._router.add_api_route(self._config.sms_params.route, self._send_sms, methods=[self._config.sms_params.methods],
+                                   response_model=SmsResponse)
         self._application.include_router(self._router)
 
         return self
 
-    async def _send_sms(self):
-        return await self._WORKER.send_sms()
+    async def _send_sms(self, recipient: Recipient) -> SmsResponse:
+        return await self._WORKER.send_sms(recipient)
 
 
