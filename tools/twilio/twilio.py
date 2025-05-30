@@ -41,7 +41,8 @@ class Twilio:
 
     async def make_call(self, recipient: Recipient) -> CallResponse:
         response = VoiceResponse()
-        response.say(recipient.message, language=self._twilio_params.language)
+        response.say(recipient.message, language=self._twilio_params.language,
+                     voice=recipient)
 
         call = self._client.calls.create(
             to=recipient.phone,
