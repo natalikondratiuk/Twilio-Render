@@ -1,7 +1,5 @@
 {
   "router_params": {
-    "host": "0.0.0.0",
-    "port": 8001,
     "sms_params": {
       "route": "/sms/",
       "methods": "POST"

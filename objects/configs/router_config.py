@@ -12,8 +12,6 @@ class VoiceParameters:
 
 @dataclass
 class RouterParameters:
-    host: str
-    port: int
     sms_params: SmsParameters
     voice_params: VoiceParameters
 
