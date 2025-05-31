@@ -39,12 +39,11 @@ class Controller:
         return self
 
     async def _send_sms(self, recipient: Annotated[Recipient, Query()], response: Response):
-        '''try:
+        try:
             return await self._WORKER.send_sms(recipient)
         except Exception as e:
             response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
-            return FailedResponse()'''
-        return await self._WORKER.send_sms(recipient)
+            return FailedResponse()
 
     async def _make_call(self, recipient: Annotated[Recipient, Query()], response: Response):
         try:
